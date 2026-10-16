@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package racehub;
+
+// Service definition for RaceHub telemetry
+service RaceHubTelemetry {
+    // Stream telemetry data for a specific recorder
+    rpc StreamTelemetry (TelemetryRequest) returns (stream TelemetryData) {}
+}
+
+// Request message containing recorder ID
+message TelemetryRequest {
+    string recorder_id = 1;
+}
+
+// Telemetry data message containing car state
+message TelemetryData {
+    // Timestamp in milliseconds since epoch
+    int64 timestamp = 1;
+    
+    // Car control inputs (normalized between -1.0 and 1.0)
+    float throttle = 2;
+    float brake = 3;
+    float steering = 4;
+    
+    // Car state
+    float speed_ms = 5;  // Speed in meters per second
+    int32 gear = 6;      // Current gear (-1 = reverse, 0 = neutral, 1+ = forward gears)
+    float rpm = 7;       // Engine RPM
+    
+    // Car position and orientation
+    float position_x = 8;
+    float position_y = 9;
+    float position_z = 10;
+    float rotation_pitch = 11;
+    float rotation_yaw = 12;
+    float rotation_roll = 13;
+    
+    // Additional telemetry
+    float lateral_g = 14;
+    float longitudinal_g = 15;
+    float fuel_level = 16;     // Fuel level as percentage (0-100)
+    float engine_temp = 17;    // Engine temperature in Celsius
+    bool drs_enabled = 18;     // DRS (Drag Reduction System) state
+    
+    // Lap information
+    int32 current_lap = 19;
+    float last_lap_time = 20;  // Last lap time in seconds
+    float current_lap_time = 21; // Current lap time in seconds
+    string sector = 22;        // Current track sector
+}

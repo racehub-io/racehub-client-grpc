@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "racehub-client-grpc"
+version = "0.1.0"
+description = ""
+authors = ["Michael Sansoni"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "<3.14,>=3.8"
+grpcio = "^1.60.0"
+grpcio-tools = "^1.60.0"
+pyinstaller = "^6.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+grpc-server = "racehub_client_grpc.server:main"
